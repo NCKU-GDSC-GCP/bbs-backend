@@ -1,24 +1,20 @@
 package router
 
 import (
-	"bbs_backend/entity"
+	"bbs_backend/models"
+	"bbs_backend/services"
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
-
-var users = []entity.User{
-	{Id: 1, Name: "Lewis", Email: "robertlewis@nycu.com"},
-	{Id: 2, Name: "Steven", Email: "steven@trendm.com"},
-	{Id: 3, Name: "Bob", Email: "bobbob@gamil.com"},
-}
 
 // UserRouter a contract what this router can do
 type UserRouter interface {
 	GetUsers(c *gin.Context)
+	CreateUser(c *gin.Context)
 }
 
 type userRouter struct {
-	// services
 }
 
 func NewUserRouter() UserRouter {
@@ -26,5 +22,20 @@ func NewUserRouter() UserRouter {
 }
 
 func (r *userRouter) GetUsers(c *gin.Context) {
+	users, _ := model.UserModel.GetAll()
 	c.IndentedJSON(http.StatusOK, users)
+}
+
+func (r *userRouter) CreateUser(c *gin.Context) {
+	name := c.PostForm("nickname")
+	email := c.PostForm("email")
+	passwd := c.PostForm("password")
+	// headshot := c.DefaultPostForm("headshot", "")
+	user, err := service.UserService.CreateUser(name, email, passwd)
+	if err != nil {
+		c.JSON(http.StatusConflict,
+			gin.H{"message": "Failed to create user"})
+	}
+
+	c.JSON(201, user)
 }

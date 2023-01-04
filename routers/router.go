@@ -9,6 +9,7 @@ var (
 func Routes(app *gin.Engine) {
 	userRoutes := app.Group("api/user")
 	{
-		userRoutes.GET("/get", user.GetUsers)
+		userRoutes.GET("/", user.GetUsers)
+		userRoutes.POST("/", user.CreateUser)
 	}
 }
