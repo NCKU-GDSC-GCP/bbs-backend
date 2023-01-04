@@ -1,8 +1,14 @@
 package entity
 
+import (
+	"time"
+)
+
 type User struct {
-	Id       uint64 `gorm:"primary_key:auto_increment" json:"id"`
-	Name     string `gorm:"type:varchar(255)" json:"name"`
-	Email    string `gorm:"uniqueIndex:type:varchar(255)" json:"email"`
-	Password string `gorm:"->;<-;not null" json:"-"`
+	ID        uint64    `gorm:"primary_key:auto_increment" json:"id"`
+	Nickname  string    `gorm:"type:varchar(255);not null" json:"nickname"`
+	Email     string    `gorm:"type:varchar(255);not null;unique" json:"email"`
+	Password  string    `gorm:"size:varchar(255);not null;" json:"password"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
