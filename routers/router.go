@@ -1,15 +1,16 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	v1 "bbs_backend/routers/api/v1"
+
+	"github.com/gin-gonic/gin"
+)
 
 var (
-	user UserRouter = NewUserRouter()
+	userRoute v1.UserRouter = v1.NewUserRouter()
 )
 
 func Routes(app *gin.Engine) {
-	userRoutes := app.Group("api/user")
-	{
-		userRoutes.GET("/", user.GetUsers)
-		userRoutes.POST("/", user.CreateUser)
-	}
+	apiRoute := app.Group("api")
+	userRoute.Setup(apiRoute)
 }
