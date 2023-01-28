@@ -1,0 +1,18 @@
+{
+    "schemes": [
+        "http,https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "A Bulletin Board System backend using golang",
+        "title": "bbs-backend",
+        "contact": {},
+        "license": {
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "127.0.0.1:8080",
+    "basePath": "/api/v1",
+    "paths": {}
+}

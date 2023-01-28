@@ -1,0 +1,13 @@
+basePath: /api/v1
+host: 127.0.0.1:8080
+info:
+  contact: {}
+  description: A Bulletin Board System backend using golang
+  license:
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: bbs-backend
+  version: "1.0"
+paths: {}
+schemes:
+- http,https
+swagger: "2.0"
