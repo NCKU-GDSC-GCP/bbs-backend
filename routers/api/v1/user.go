@@ -24,16 +24,25 @@ func NewUserRouter(m UserModel) UserRouter {
 }
 
 func (r *userRouter) Setup(rg *gin.RouterGroup) {
-	user := rg.Group("v1/user")
-	user.GET("/", r.GetUsers)
+	user := rg.Group("v1/users")
 	user.POST("/", r.CreateUser)
+	user.GET("/", r.GetUsers)
+	user.PUT("/:id", r.UpdateUser)
+	user.DELETE("/:id", r.DeleteUser)
+	user.GET("/:id", r.GetUser)
 }
 
-func (r *userRouter) GetUsers(c *gin.Context) {
-	users, _ := r.model.GetAll()
-	c.IndentedJSON(http.StatusOK, users)
-}
-
+// CreateUser 	 godoc
+// @Summary      Register a new user
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Param nickname formData string true "nickname"
+// @Param email formData string true "email"
+// @Param password formData string true "password"
+// @Success      201  {object}  nil
+// @Failure      500  {object}  nil
+// @Router       /users [post]
 func (r *userRouter) CreateUser(c *gin.Context) {
 	name := c.PostForm("nickname")
 	email := c.PostForm("email")
@@ -46,4 +55,51 @@ func (r *userRouter) CreateUser(c *gin.Context) {
 	}
 
 	c.JSON(201, user)
+}
+
+// GetUsers 	 godoc
+// @Summary      Get all users' information
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  []model.UserModel
+// @Failure      500  {object}  nil
+// @Router       /users [get]
+func (r *userRouter) GetUsers(c *gin.Context) {
+	users, _ := r.model.GetAll()
+	c.IndentedJSON(http.StatusOK, users)
+}
+
+// UpdateUser    godoc
+// @Summary      update the user
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  nil
+// @Failure      500  {object}  nil
+// @Router       /users/:id [put]
+func (r *userRouter) UpdateUser(c *gin.Context) {
+}
+
+// DeleteUser    godoc
+// @Summary      delete the user
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  nil
+// @Failure      500  {object}  nil
+// @Router       /users/:id [delete]
+func (r *userRouter) DeleteUser(c *gin.Context) {
+}
+
+// GetUser       godoc
+// @Summary      Get the user's information
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  model.UserModel
+// @Failure      500  {object}  nil
+// @Router       /users/:id [get]
+func (r *userRouter) GetUser(c *gin.Context) {
+
 }

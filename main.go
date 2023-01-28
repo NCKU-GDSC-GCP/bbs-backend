@@ -12,14 +12,14 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title bbs-backend
-// @version 1.0
-// @description A Bulletin Board System backend using golang
-// @schemes http,https
-// @host localhost:8080
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host 127.0.0.1:8080
-// @BasePath /api/v1
+//	@title			bbs-backend
+//	@version		1.0
+//	@description	A Bulletin Board System backend using golang
+//	@schemes		http,https
+//	@host			localhost:8080
+//	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
+//	@host			127.0.0.1:8080
+//	@BasePath		/api/v1
 
 func main() {
 	loaders.Init()
