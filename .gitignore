@@ -7,6 +7,11 @@
 *.dll
 *.so
 *.dylib
+
+# Builds
+bin/
+
+# Environment variable
 .env
 
 # Test binary, built with `go test -c`
@@ -20,3 +25,6 @@
 
 # Go workspace file
 go.work
+
+# Vscode workspace file
+.vscode/

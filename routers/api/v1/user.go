@@ -1,8 +1,8 @@
-package router
+package v1
 
 import (
-	"bbs_backend/models"
-	"bbs_backend/services"
+	. "bbs_backend/models"
+	service "bbs_backend/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,19 +10,27 @@ import (
 
 // UserRouter a contract what this router can do
 type UserRouter interface {
-	GetUsers(c *gin.Context)
-	CreateUser(c *gin.Context)
+	Setup(rg *gin.RouterGroup)
 }
 
 type userRouter struct {
+	model UserModel
 }
 
-func NewUserRouter() UserRouter {
-	return &userRouter{}
+func NewUserRouter(m UserModel) UserRouter {
+	return &userRouter{
+		model: m,
+	}
+}
+
+func (r *userRouter) Setup(rg *gin.RouterGroup) {
+	user := rg.Group("v1/user")
+	user.GET("/", r.GetUsers)
+	user.POST("/", r.CreateUser)
 }
 
 func (r *userRouter) GetUsers(c *gin.Context) {
-	users, _ := model.UserModel.GetAll()
+	users, _ := r.model.GetAll()
 	c.IndentedJSON(http.StatusOK, users)
 }
 
