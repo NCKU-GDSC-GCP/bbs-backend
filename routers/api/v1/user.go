@@ -24,8 +24,9 @@ func NewUserRouter(m UserModel) UserRouter {
 }
 
 func (r *userRouter) Setup(rg *gin.RouterGroup) {
-	rg.GET("/", r.GetUsers)
-	rg.POST("/", r.CreateUser)
+	user := rg.Group("v1/user")
+	user.GET("/", r.GetUsers)
+	user.POST("/", r.CreateUser)
 }
 
 func (r *userRouter) GetUsers(c *gin.Context) {
