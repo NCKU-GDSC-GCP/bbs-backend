@@ -13,6 +13,7 @@ func newUserService() *userService {
 }
 
 type userService struct {
+	m model.UserModel
 }
 
 func (s *userService) CreateUser(nickname, email, password string) (*entity.User, error) {
@@ -25,7 +26,7 @@ func (s *userService) CreateUser(nickname, email, password string) (*entity.User
 		Password: password, // TODO hashing
 	}
 
-	err := model.UserModel.Create(user)
+	err := s.m.Create(user)
 	if err != nil {
 		return nil, err
 	}

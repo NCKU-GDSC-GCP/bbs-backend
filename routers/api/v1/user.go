@@ -1,7 +1,7 @@
 package v1
 
 import (
-	model "bbs_backend/models"
+	. "bbs_backend/models"
 	service "bbs_backend/services"
 	"net/http"
 
@@ -14,10 +14,13 @@ type UserRouter interface {
 }
 
 type userRouter struct {
+	model UserModel
 }
 
-func NewUserRouter() UserRouter {
-	return &userRouter{}
+func NewUserRouter(m UserModel) UserRouter {
+	return &userRouter{
+		model: m,
+	}
 }
 
 func (r *userRouter) Setup(rg *gin.RouterGroup) {
@@ -26,7 +29,7 @@ func (r *userRouter) Setup(rg *gin.RouterGroup) {
 }
 
 func (r *userRouter) GetUsers(c *gin.Context) {
-	users, _ := model.UserModel.GetAll()
+	users, _ := r.model.GetAll()
 	c.IndentedJSON(http.StatusOK, users)
 }
 

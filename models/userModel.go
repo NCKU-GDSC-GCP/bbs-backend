@@ -6,13 +6,16 @@ import (
 	"fmt"
 )
 
-var UserModel = newUserModel()
-
-func newUserModel() *userModel {
-	return &userModel{}
+type UserModel interface {
+	GetAll() (*[]entity.User, error)
+	Create(user *entity.User) (err error)
 }
 
 type userModel struct {
+}
+
+func NewUserModel() UserModel {
+	return &userModel{}
 }
 
 func (r *userModel) Create(user *entity.User) (err error) {
