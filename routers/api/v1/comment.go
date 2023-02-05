@@ -27,6 +27,9 @@ func (r *commentRouter) Setup(rg *gin.RouterGroup) {
 // @Tags         comments
 // @Accept       json
 // @Produce      json
+// @Param postId formData int true "postId"
+// @Param authorId formData int true "authorId"
+// @Param content formData string true "content"
 // @Success      201  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /comments [post]
@@ -35,11 +38,12 @@ func (r *commentRouter) CreateComment(c *gin.Context) {
 }
 
 // GetComments   godoc
-// @Summary      Get all comments
+// @Summary      Get all comments of the post
 // @Tags         comments
 // @Accept       json
 // @Produce      json
-// @Success      201  {object}  nil
+// @Param postId formData int true "postId"
+// @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /comments [get]
 func (r *commentRouter) GetComments(c *gin.Context) {
@@ -51,7 +55,9 @@ func (r *commentRouter) GetComments(c *gin.Context) {
 // @Tags         comments
 // @Accept       json
 // @Produce      json
-// @Success      201  {object}  nil
+// @Param id path int true "id"
+// @Param content formData string true "content"
+// @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /comments/:id [put]
 func (r *commentRouter) UpdateComment(c *gin.Context) {
@@ -63,7 +69,8 @@ func (r *commentRouter) UpdateComment(c *gin.Context) {
 // @Tags         comments
 // @Accept       json
 // @Produce      json
-// @Success      201  {object}  nil
+// @Param id path int true "id"
+// @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /comments/:id [delete]
 func (r *commentRouter) DeleteComment(c *gin.Context) {
@@ -75,6 +82,7 @@ func (r *commentRouter) DeleteComment(c *gin.Context) {
 // @Tags         comments
 // @Accept       json
 // @Produce      json
+// @Param id path int true "id"
 // @Success      201  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /comments/:id [get]

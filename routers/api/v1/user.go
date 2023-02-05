@@ -27,9 +27,9 @@ func (r *userRouter) Setup(rg *gin.RouterGroup) {
 	user := rg.Group("v1/users")
 	user.POST("/", r.CreateUser)
 	user.GET("/", r.GetUsers)
-	user.PUT("/:id", r.UpdateUser)
-	user.DELETE("/:id", r.DeleteUser)
-	user.GET("/:id", r.GetUser)
+	user.PUT("/:uid", r.UpdateUser)
+	user.DELETE("/:uid", r.DeleteUser)
+	user.GET("/:uid", r.GetUser)
 }
 
 // CreateUser 	 godoc
@@ -75,6 +75,9 @@ func (r *userRouter) GetUsers(c *gin.Context) {
 // @Tags         users
 // @Accept       json
 // @Produce      json
+// @Param uid path int true "uid"
+// @Param nickname formData string true "nickname"
+// @Param password formData string true "password"
 // @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /users/:id [put]
@@ -86,6 +89,7 @@ func (r *userRouter) UpdateUser(c *gin.Context) {
 // @Tags         users
 // @Accept       json
 // @Produce      json
+// @Param uid path int true "uid"
 // @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /users/:id [delete]
@@ -97,6 +101,7 @@ func (r *userRouter) DeleteUser(c *gin.Context) {
 // @Tags         users
 // @Accept       json
 // @Produce      json
+// @Param uid path int false "uid"
 // @Success      200  {object}  model.UserModel
 // @Failure      500  {object}  nil
 // @Router       /users/:id [get]

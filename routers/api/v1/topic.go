@@ -14,7 +14,7 @@ func NewTopicRouter() TopicRouter {
 }
 
 func (r *topicRouter) Setup(rg *gin.RouterGroup) {
-	topic := rg.Group("v1/posts")
+	topic := rg.Group("v1/topics")
 	topic.POST("/", r.CreateTopic)
 	topic.GET("/", r.GetTopics)
 	topic.PUT("/:id", r.UpdateTopic)
@@ -27,6 +27,8 @@ func (r *topicRouter) Setup(rg *gin.RouterGroup) {
 // @Tags         topics
 // @Accept       json
 // @Produce      json
+// @Param name formData string true "name"
+// @Param description formData string true "description"
 // @Success      201  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /topics [post]
@@ -50,6 +52,9 @@ func (r *topicRouter) GetTopics(c *gin.Context) {
 // @Tags         topics
 // @Accept       json
 // @Produce      json
+// @Param id path int true "id"
+// @Param name formData string false "name"
+// @Param description formData string false "description"
 // @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /topics/:id [put]
@@ -62,6 +67,7 @@ func (r *topicRouter) UpdateTopic(c *gin.Context) {
 // @Tags         topics
 // @Accept       json
 // @Produce      json
+// @Param id path int true "id"
 // @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /topics/:id [delete]
@@ -74,6 +80,7 @@ func (r *topicRouter) DeleteTopic(c *gin.Context) {
 // @Tags         topics
 // @Accept       json
 // @Produce      json
+// @Param id path int true "id"
 // @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /topics/:id [get]

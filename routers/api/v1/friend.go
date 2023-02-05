@@ -16,9 +16,9 @@ func NewFriendRouter() FriendRouter {
 func (r *friendRouter) Setup(rg *gin.RouterGroup) {
 	user := rg.Group("v1/friends")
 	user.POST("/", r.AddFriend)
-	user.GET("/:id", r.GetFriends)
-	user.PUT("/:id", r.UpdateFriend)
-	user.DELETE("/:id", r.DeleteFriend)
+	user.GET("/:uid", r.GetFriends)
+	user.PUT("/", r.UpdateFriend)
+	user.DELETE("/", r.DeleteFriend)
 }
 
 // CreateFriend	 godoc
@@ -26,6 +26,9 @@ func (r *friendRouter) Setup(rg *gin.RouterGroup) {
 // @Tags         friends
 // @Accept       json
 // @Produce      json
+// @Param uid formData int true "uid"
+// @Param targetUid formData int true "targetUid"
+// @Param status formData int true "status"
 // @Success      201  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /friends [post]
@@ -38,6 +41,7 @@ func (r *friendRouter) AddFriend(c *gin.Context) {
 // @Tags         friends
 // @Accept       json
 // @Produce      json
+// @Param uid path int true "uid"
 // @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /friends/:id [get]
@@ -50,6 +54,9 @@ func (r *friendRouter) GetFriends(c *gin.Context) {
 // @Tags         friends
 // @Accept       json
 // @Produce      json
+// @Param uid formData int true "uid"
+// @Param targetUid formData int true "targetUid"
+// @Param status formData int true "status"
 // @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /friends/:id [put]
@@ -62,6 +69,8 @@ func (r *friendRouter) UpdateFriend(c *gin.Context) {
 // @Tags         friends
 // @Accept       json
 // @Produce      json
+// @Param uid formData int true "uid"
+// @Param targetUid formData int true "targetUid"
 // @Success      200  {object}  nil
 // @Failure      500  {object}  nil
 // @Router       /friends/:id [delete]

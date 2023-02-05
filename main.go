@@ -12,12 +12,12 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-//	@title			bbs-backend
+//	@title			bbs-backend API Docs
 //	@version		1.0
-//	@description	A Bulletin Board System backend using golang
+//	@description	A Bulletin Board System backend base on golang
+//  @description	BBS 前後端溝通介面，每個 row 代表一個可使用的 API 實體
 //	@schemes		http,https
 //	@host			localhost:8080
-//	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
 //	@host			127.0.0.1:8080
 //	@BasePath		/api/v1
 
