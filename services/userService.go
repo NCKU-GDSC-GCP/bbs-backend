@@ -9,7 +9,7 @@ import (
 var UserService = newUserService()
 
 func newUserService() *userService {
-	return &userService{}
+	return &userService{m: model.NewUserModel()}
 }
 
 type userService struct {
